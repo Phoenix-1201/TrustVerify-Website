@@ -1,0 +1,1 @@
+export { TrustVerify } from "./TrustVerify";
