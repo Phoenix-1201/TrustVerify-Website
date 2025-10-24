@@ -1,4 +1,6 @@
 import React from "react";
+import { Shield, RefreshCw, Search, UserCheck } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
 import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
@@ -16,11 +18,11 @@ import { Separator } from "../../components/ui/separator";
 import { Textarea } from "../../components/ui/textarea";
 
 const navigationItems = [
-  { label: "Home", active: true },
-  { label: "Feature", active: false },
-  { label: "How it works", active: false },
-  { label: "Pricing", active: false },
-  { label: "Survey", active: false },
+  { label: "Home", active: true, href: "/" },
+  { label: "Feature", active: false, href: "#features" },
+  { label: "How it works", active: false, href: "#how-it-works" },
+  { label: "Pricing", active: false, href: "#pricing" },
+  { label: "Survey", active: false, href: "/survey" },
 ];
 
 const trustBadges = [
@@ -107,28 +109,28 @@ const features = [
 
 const processSteps = [
   {
-    number: "/frame-1.svg",
+    icon: <img src="/frame-1.svg"/>,
     title: "Onboard & Verify",
     description:
       "Users and businesses complete KYC/KYB verification with our compliant screening process",
     active: true,
   },
   {
-    number: "/frame-2.svg",
+    icon: <img src="/frame-2.svg"/>,
     title: "Assess & Score",
     description:
       "AI-powered fraud detection analyzes risk factors and generates trust scores for all parties",
     active: false,
   },
   {
-    number: "/frame.svg",
+    icon: <img src="/frame-3.svg"/>,
     title: "Secure Transaction",
     description:
       "Funds are held in escrow while transaction conditions are verified and fulfilled",
     active: false,
   },
   {
-    number: "/frame-3.svg",
+    icon: <img src="/frame-4.svg"/>,
     title: "Complete & Build Trust",
     description:
       "Successful transactions improve trust scores; disputes are resolved through fair arbitration",
@@ -180,8 +182,8 @@ const pricingPlans = [
     features: [
       "Basic Fraud Scoring",
       "KYC verification",
-      "Up to €10kescrow",
-      " Email Supprot",
+      "Up to €10k escrow",
+        " Email Support",
     ],
     popular: false,
   },
@@ -194,7 +196,7 @@ const pricingPlans = [
     features: [
       "Advanced Fraud Scoring",
       "KYC + KYB + AML Screening",
-      "Up to €10kescrow",
+      "Up to €10k escrow",
       "Arbitration service",
       "Priority Support",
     ],
@@ -246,13 +248,27 @@ const footerSections = [
 ];
 
 export const TrustVerify = (): JSX.Element => {
+  const navigate = useNavigate();
+
+  const handleNavigation = (href: string) => {
+    if (href.startsWith('/')) {
+      navigate(href);
+    } else {
+      // Handle anchor links for same page navigation
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
   return (
     <div className="bg-[#ffffff] overflow-hidden w-full relative">
-      <section className="relative bg-[#1e1e1e] px-[100px] py-[226px]">
-        <div className="absolute top-0 left-0 w-full h-full bg-[#23b67252] blur-[123px] pointer-events-none" />
-        <div className="absolute top-0 left-0 w-full h-full bg-[#27ae601a] blur-[123px] pointer-events-none" />
+      <section className="relative bg-[#1e1e1e] px-4 md:px-[100px] py-[100px] md:py-[226px]">
+        
+        
 
-        <div className="absolute top-[-99px] left-[-510px] w-[1000px] h-96 pointer-events-none">
+        <div className="absolute top-[600px] left-[1000px] pointer-events-none">
           <img
             className="w-full h-full object-cover"
             alt="Vector"
@@ -260,77 +276,21 @@ export const TrustVerify = (): JSX.Element => {
           />
         </div>
 
-        <div className="absolute top-[100px] left-[200px] rotate-[-2.25deg]">
-          <div className="w-[350px] h-[220px] bg-[#191a1f] rounded-[22.41px] overflow-hidden relative">
-            <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-[#ffffff0a] rotate-[-51.22deg]" />
-              <div className="absolute inset-0 bg-[#ffffff0f] rotate-[-51.22deg]" />
-              <div className="absolute inset-0 bg-[#ffffff14] rotate-[-51.22deg]" />
-            </div>
-            <div className="absolute top-[140px] left-[30px] [font-family:'Poppins',Helvetica] font-medium text-[#ffffff] text-[19.6px]">
-              03/24
-            </div>
-            <div className="absolute top-[120px] left-[30px] [font-family:'Poppins',Helvetica] font-normal text-[#ffffff] text-[11.2px] leading-[11.2px]">
-              VALID
-              <br />
-              THRU
-            </div>
-            <div className="absolute bottom-[30px] left-[30px] [font-family:'Poppins',Helvetica] font-medium text-[#ffffff] text-[22.4px] tracking-[2.24px]">
-              WESLY SEAN
-            </div>
-            <div className="absolute top-[80px] left-[30px] [font-family:'Lato',Helvetica] font-bold text-[#fdfdfd] text-[31.4px] tracking-[0.63px]">
-              6214&nbsp;&nbsp; 8610&nbsp;&nbsp; 2880&nbsp;&nbsp; 9272
-            </div>
-            <div className="absolute top-[30px] left-[30px] [font-family:'Poppins',Helvetica] font-medium text-[#ffffff] text-[19.6px]">
-              Debit
-            </div>
-            <img
-              className="absolute top-[30px] right-[30px] w-10 h-[15px]"
-              alt="Emv chip"
-              src="/emv-chip-1.svg"
-            />
-          </div>
-        </div>
+        <div className="absolute w-[466px] h-[466px] left-[1127px] top-[229px] bg-[rgba(35,182,114,0.32)] rounded-full blur-[123px] pointer-events-none" />
+        <img
+          className="absolute top-[150px] left-[950px]"
+          alt="Group 466"
+          src="/Group 466.png"
+        />
 
-        <div className="absolute top-[150px] left-[300px] rotate-[-14.80deg]">
-          <div className="w-[350px] h-[220px] bg-[#191a1f] rounded-[22.41px] overflow-hidden relative">
-            <div className="absolute inset-0">
-              <div className="absolute inset-0 bg-[#ffffff0a] rotate-[-51.22deg]" />
-              <div className="absolute inset-0 bg-[#ffffff0f] rotate-[-51.22deg]" />
-              <div className="absolute inset-0 bg-[#ffffff14] rotate-[-51.22deg]" />
-            </div>
-            <div className="absolute top-[140px] left-[30px] [font-family:'Poppins',Helvetica] font-medium text-[#ffffff] text-[19.6px]">
-              03/24
-            </div>
-            <div className="absolute top-[120px] left-[30px] [font-family:'Poppins',Helvetica] font-normal text-[#ffffff] text-[11.2px] leading-[11.2px]">
-              VALID
-              <br />
-              THRU
-            </div>
-            <div className="absolute bottom-[30px] left-[30px] [font-family:'Poppins',Helvetica] font-medium text-[#ffffff] text-[22.4px] tracking-[2.24px]">
-              WESLY SEAN
-            </div>
-            <div className="absolute top-[80px] left-[30px] [font-family:'Lato',Helvetica] font-bold text-[#fdfdfd] text-[31.4px] tracking-[0.63px]">
-              6214&nbsp;&nbsp; 8610&nbsp;&nbsp; 2880&nbsp;&nbsp; 9272
-            </div>
-            <div className="absolute top-[30px] left-[30px] [font-family:'Poppins',Helvetica] font-medium text-[#ffffff] text-[19.6px]">
-              Debit
-            </div>
-            <img
-              className="absolute top-[30px] right-[30px] w-[31px] h-[26px]"
-              alt="Emv chip"
-              src="/emv-chip.svg"
-            />
-          </div>
-        </div>
-
-        <header className="absolute top-[50px] left-0 right-0 flex items-center justify-between px-[100px]">
+        <header className="absolute top-[50px] left-0 right-0 flex items-center justify-between px-4 md:px-[100px]">
           <img className="h-[37px]" alt="Frame" src="/frame-2147228395.svg" />
 
-          <nav className="flex items-center gap-[50px]">
+          <nav className="hidden md:flex items-center gap-[50px]">
             {navigationItems.map((item, index) => (
               <button
                 key={index}
+                onClick={() => handleNavigation(item.href)}
                 className={`[font-family:'DM_Sans',Helvetica] text-xl tracking-[0] leading-[normal] whitespace-nowrap ${
                   item.active
                     ? "font-medium text-[#ffffff]"
@@ -348,7 +308,7 @@ export const TrustVerify = (): JSX.Element => {
         </header>
 
         <div className="relative z-10 flex flex-col items-start gap-[30px] max-w-[1200px]">
-          <Badge className="h-auto inline-flex items-center gap-[22.17px] px-[22.17px] py-0 bg-[#ffffff] rounded-[15.84px] shadow-[0px_0px_22.81px_#00000012] border-0">
+          <Badge className="h-auto inline-flex items-center gap-[22.17px] px-[22.17px] py-4 bg-[#ffffff] rounded-[15.84px] shadow-[0px_0px_22.81px_#00000012] border-0">
             <div className="inline-flex items-center gap-[9.5px]">
               <img
                 className="w-[24.29px] h-[24.29px]"
@@ -365,9 +325,10 @@ export const TrustVerify = (): JSX.Element => {
             </span>
           </Badge>
 
-          <h1 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-normal text-7xl tracking-[0] leading-[80px]">
+          <h1 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-normal text-3xl md:text-7xl tracking-[0] leading-[40px] md:leading-[80px]">
             <span className="font-medium text-[#ffffff]">
-              Build Trust Prevent Fraud Protect Every{" "}
+              Build Trust Prevent<br />
+              Fraud Protect Every<br />
             </span>
             <span className="font-medium text-[#27ae60]">Transaction</span>
           </h1>
@@ -392,7 +353,7 @@ export const TrustVerify = (): JSX.Element => {
           <div className="inline-flex items-center gap-5">
             <Button className="h-auto bg-app-secondary rounded-[10px] overflow-hidden shadow-[0px_0px_19.5px_#27ae60] px-[30px] py-[15px] relative">
               <span className="[font-family:'DM_Sans',Helvetica] font-bold text-[#ffffff] text-lg text-center tracking-[-0.20px] leading-[18px] whitespace-nowrap">
-                Join Beta Program
+                Join Beta Program &nbsp; &nbsp;
               </span>
               <img
                 className="absolute right-[10px] top-1/2 -translate-y-1/2 w-[30px] h-[30px]"
@@ -421,7 +382,7 @@ export const TrustVerify = (): JSX.Element => {
         </div>
       </section>
 
-      <section className="py-[50px] bg-[#ffffff]">
+      <section className="bg-[#ffffff]">
         <img
           className="w-full h-[134px] object-cover"
           alt="Frame"
@@ -429,11 +390,11 @@ export const TrustVerify = (): JSX.Element => {
         />
       </section>
 
-      <section className="bg-[#f3f3f3] px-[100px] py-[100px]">
+      <section id="features" className="bg-[#f3f3f3] px-[100px] py-[100px]">
         <div className="flex flex-col items-center gap-20">
           <div className="inline-flex flex-col items-center gap-4">
             <div className="inline-flex items-center gap-3">
-              <div className="w-[60px] h-[2px] bg-[#0b3a78]" />
+              <div className="w-[2px] h-[24px] bg-[#0b3a78]" />
               <span className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-xl tracking-[0] leading-[normal] whitespace-nowrap">
                 Our Services
               </span>
@@ -478,11 +439,80 @@ export const TrustVerify = (): JSX.Element => {
         </div>
       </section>
 
+      <section id="how-it-works" className="bg-[#ffffff] pt-[100px]">
+        <div className="flex flex-col items-center gap-20">
+          <div className="flex flex-col items-center gap-4 max-w-[900px]">
+            <div className="inline-flex items-center gap-3">
+              <div className="w-[2px] h-[24px] bg-secondry" />
+              <span className="font-medium text-secondry [font-family:'DM_Sans',Helvetica] text-xl tracking-[0] leading-[normal] whitespace-nowrap">
+                {" "}
+                How it Process
+              </span>
+            </div>
+
+            <h2 className="bg-[linear-gradient(90deg,rgba(39,174,96,1)_0%,rgba(0,82,204,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-transparent text-5xl text-center tracking-[0] leading-[normal]">
+              The Journey to Financial Empowerment
+            </h2>
+
+            <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-xl text-center tracking-[0] leading-[normal]">
+              Enterprise-grade tools that transform how you build trust, prevent
+              fraud, and protect every transaction.
+            </p>
+          </div>
+
+          {/* Process Flow Section */}
+          <div className="relative w-full max-w-[1200px] mx-auto">
+            <div className="absolute top-[45px] left-0 right-0 h-[2px] bg-[#e0e0e0] z-0 mx-10 md:mx-20" />
+
+            <div className="relative z-10 flex flex-col md:flex-row justify-between gap-16 md:gap-0">
+              {processSteps.map((processSteps, index) => (
+                <div key={index} className="flex flex-col items-center text-center w-48">
+                  <div
+                    className={`w-20 h-20 flex items-center justify-center rounded-full shadow-md ${
+                      processSteps.active ? "bg-[#0b3a78]" : "bg-white border border-[#e0e0e0]"
+                    }`}
+                  >
+                    {processSteps.icon}
+                  </div>
+                  <h3 className="text-xl font-medium mt-6">{processSteps.title}</h3>
+                  <p className="text-gray-500 text-sm mt-2">{processSteps.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+
+          <div className="w-full bg-[#0b3a78] py-[11px]">
+              <div className="flex justify-center items-center gap-6">
+                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                  Perfect for
+                </span>
+                <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
+                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                  E-commerce
+                </span>
+                <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
+                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                  Marketplaces
+                </span>
+                <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
+                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                  B2B Services
+                </span>
+                <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
+                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                  Digital Platforms
+                </span>
+              </div>
+          </div>
+        </div>
+      </section>
+
       <section className="bg-[#f3f3f3] px-[100px] py-[100px]">
         <div className="flex flex-col items-center gap-[114px]">
           <div className="flex flex-col items-center gap-4 max-w-[900px]">
             <div className="inline-flex items-center gap-3">
-              <div className="w-[60px] h-[2px] bg-[#0b3a78]" />
+              <div className="w-[2px] h-[24px] bg-[#0b3a78]" />
               <span className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-xl tracking-[0] leading-[normal] whitespace-nowrap">
                 Features
               </span>
@@ -493,7 +523,7 @@ export const TrustVerify = (): JSX.Element => {
             </h2>
 
             <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-xl text-center tracking-[0] leading-[normal]">
-              Every tool you need to build trust, prevent fraud, and secure
+              Every tool you need to build trust, prevent fraud, and secure <br />
               transactions
             </p>
           </div>
@@ -540,83 +570,7 @@ export const TrustVerify = (): JSX.Element => {
         </div>
       </section>
 
-      <section className="bg-[#ffffff] px-[100px] py-[100px]">
-        <div className="flex flex-col items-center gap-20">
-          <div className="flex flex-col items-center gap-4 max-w-[900px]">
-            <div className="inline-flex items-center gap-3">
-              <div className="w-[60px] h-[2px] bg-secondry" />
-              <span className="font-medium text-secondry [font-family:'DM_Sans',Helvetica] text-xl tracking-[0] leading-[normal] whitespace-nowrap">
-                {" "}
-                How it Process
-              </span>
-            </div>
-
-            <h2 className="bg-[linear-gradient(90deg,rgba(39,174,96,1)_0%,rgba(0,82,204,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-transparent text-5xl text-center tracking-[0] leading-[normal]">
-              The Journey to Financial Empowerment
-            </h2>
-
-            <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-xl text-center tracking-[0] leading-[normal]">
-              Enterprise-grade tools that transform how you build trust, prevent
-              fraud, and protect every transaction.
-            </p>
-          </div>
-
-          <div className="relative w-full max-w-[1720px]">
-            <div className="grid grid-cols-4 gap-8 mb-[50px]">
-              {processSteps.map((step, index) => (
-                <div
-                  key={index}
-                  className="flex flex-col items-center gap-[30px]"
-                >
-                  <div
-                    className={`w-full h-[4px] ${step.active ? "bg-[#0b3a78] shadow-[0px_4px_3px_#00000040]" : "bg-grayswhite shadow-[0px_0px_3px_#00000040]"}`}
-                  />
-                  <div className="flex flex-col items-center gap-3.5 relative">
-                    <h3 className="[font-family:'Suisse_Intl-Regular',Helvetica] font-normal text-[#040303] text-2xl text-center tracking-[0] leading-[normal] whitespace-nowrap">
-                      {step.title}
-                    </h3>
-                    <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-sm text-center tracking-[0] leading-[normal]">
-                      {step.description}
-                    </p>
-                    <img
-                      className="absolute -top-[112px] left-1/2 -translate-x-1/2 w-[38px] h-[38px]"
-                      alt="Frame"
-                      src={step.number}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="bg-[#0b3a78] px-[334px] py-[11px] rounded-lg">
-              <div className="flex items-center justify-center gap-[50px]">
-                <span className="[font-family:'Suisse_Intl-SemiBold',Helvetica] font-semibold text-grayswhite text-2xl text-center tracking-[0] leading-[normal] whitespace-nowrap">
-                  Perfect for
-                </span>
-                {perfectForItems.map((item, index) => (
-                  <React.Fragment key={index}>
-                    <div className="w-[2px] h-[30px] bg-secondry" />
-                    <span className="[font-family:'DM_Sans',Helvetica] font-medium text-grayswhite text-2xl text-center tracking-[0] leading-[normal] whitespace-nowrap">
-                      {item === "E-commerce" ? (
-                        <>
-                          <span className="font-bold">E-</span>
-                          <span className="font-medium">commerce</span>
-                        </>
-                      ) : (
-                        item
-                      )}
-                    </span>
-                  </React.Fragment>
-                ))}
-              </div>
-            </div>
-
-            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#0b3a78]" />
-            <div className="absolute bottom-[-50px] left-0 w-full h-[100px] bg-[#f0f0f0]" />
-            <div className="absolute bottom-[-100px] left-0 w-full h-[100px] bg-[#f0f0f0]" />
-          </div>
-        </div>
-      </section>
+      
 
       <section className="bg-[#ffffff] px-[100px] py-[100px]">
         <div className="flex items-center gap-[275px]">
@@ -652,7 +606,7 @@ export const TrustVerify = (): JSX.Element => {
               <div className="flex items-center gap-[11px]">
                 <Button className="h-auto bg-app-secondary rounded-[10px] overflow-hidden shadow-[0px_0px_9.8px_2px_#27ae60] px-[15px] py-2.5 relative">
                   <span className="[font-family:'DM_Sans',Helvetica] font-bold text-[#ffffff] text-lg text-center tracking-[-0.20px] leading-[18px] whitespace-nowrap">
-                    Limited Beta Access — Join Now
+                    Limited Beta Access — Join Now &nbsp; &nbsp; &nbsp;
                   </span>
                   <img
                     className="absolute right-[10px] top-1/2 -translate-y-1/2 w-[30px] h-[30px]"
@@ -672,24 +626,13 @@ export const TrustVerify = (): JSX.Element => {
         </div>
       </section>
 
-      <section className="relative bg-[linear-gradient(0deg,rgba(11,58,120,0.46)_0%,rgba(11,58,120,0.46)_100%)] bg-[url(../frame-2147228454.png)] bg-cover bg-center px-[100px] py-[100px]">
-        <div className="flex flex-col items-center justify-center gap-[50px] max-w-[900px] mx-auto">
-          <div className="flex flex-col items-start gap-[30px]">
-            <h2 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[#ffffff] text-[62px] tracking-[0] leading-[74.4px]">
-              Exclusive Secure Beta Access
-            </h2>
-            <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#ffffff] text-2xl tracking-[0] leading-[normal]">
-              Join now and get free access to advanced fraud protection.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      <section className="bg-[#f3f3f3] px-[100px] py-[100px]">
+
+      <section id="pricing" className="bg-[#f3f3f3] px-[100px] py-[100px]">
         <div className="flex flex-col items-center gap-[110px]">
           <div className="flex flex-col items-center gap-4 max-w-[900px]">
             <div className="inline-flex items-center gap-3">
-              <div className="w-[60px] h-[2px] bg-[#0b3a78]" />
+              <div className="w-[2px] h-[24px] bg-[#0b3a78]" />
               <span className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-xl tracking-[0] leading-[normal] whitespace-nowrap">
                 Pricing
               </span>
@@ -711,26 +654,27 @@ export const TrustVerify = (): JSX.Element => {
                 key={index}
                 className={`flex-1 rounded-[26px] overflow-hidden ${plan.popular ? "bg-[#0b3a78] shadow-[0px_10px_15px_#0b3a7854]" : "bg-[#ffffff] shadow-[0px_26px_40px_#bccaff21]"} border-0`}
               >
-                <CardContent className="p-10 flex flex-col justify-between min-h-[700px]">
+                <CardContent className="p-10 flex flex-col justify-between h-[850px]">
                   <div className="flex flex-col gap-7">
                     <div className="flex flex-col gap-5 relative">
                       <img className="w-14 h-14" alt="Icon" src={plan.icon} />
 
-                      {plan.popular && (
-                        <Badge className="h-auto absolute -top-[10px] -left-[10px] bg-[#ffffff14] rounded border border-solid border-[#ffffff] px-2.5 py-[5px]">
-                          <span className="[font-family:'DM_Sans',Helvetica] font-light text-grayswhite text-lg tracking-[0] leading-[normal] whitespace-nowrap">
-                            Most Popular
-                          </span>
-                        </Badge>
-                      )}
-
                       <div className="flex flex-col gap-6">
                         <div className="flex flex-col gap-3.5">
-                          <h3
-                            className={`[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[44px] tracking-[-1.00px] leading-[normal] ${plan.popular ? "text-grayswhite" : "text-[#0b3a78]"}`}
-                          >
-                            {plan.name}
-                          </h3>
+                          <div className="flex items-center gap-16">
+                            <h3
+                              className={`[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[44px] tracking-[-1.00px] leading-[normal] ${plan.popular ? "text-grayswhite" : "text-[#0b3a78]"}`}
+                            >
+                              {plan.name}
+                            </h3>
+                            {plan.popular && (
+                              <Badge className="h-auto bg-[#ffffff14] rounded border border-solid border-[#ffffff] px-2.5 py-[5px]">
+                                <span className="[font-family:'DM_Sans',Helvetica] font-light text-grayswhite text-lg tracking-[0] leading-[normal] whitespace-nowrap">
+                                  Most Popular
+                                </span>
+                              </Badge>
+                            )}
+                          </div>
                           <p
                             className={`[font-family:'DM_Sans',Helvetica] font-light text-2xl tracking-[0] leading-8 ${plan.popular ? "text-grayswhite" : "text-[#787777]"}`}
                           >
@@ -738,14 +682,14 @@ export const TrustVerify = (): JSX.Element => {
                           </p>
                         </div>
 
-                        <div className="relative">
+                        <div className="relative flex flex-row gap-3">
                           <div
                             className={`[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-6xl tracking-[-1.00px] leading-[normal] whitespace-nowrap ${plan.popular ? "text-grayswhite" : "text-[#0b3a78]"}`}
                           >
                             {plan.price}
                           </div>
                           <div
-                            className={`absolute top-0 left-[120px] [font-family:'DM_Sans',Helvetica] font-light text-2xl tracking-[0] leading-[normal] line-through whitespace-nowrap ${plan.popular ? "text-grayswhite" : "text-[#787777]"}`}
+                            className={`pt-4 [font-family:'DM_Sans',Helvetica] font-light text-2xl tracking-[0] leading-[normal] line-through whitespace-nowrap ${plan.popular ? "text-grayswhite" : "text-[#787777]"}`}
                           >
                             {plan.originalPrice}
                           </div>
@@ -757,7 +701,7 @@ export const TrustVerify = (): JSX.Element => {
                       className={`${plan.popular ? "bg-[#ffffff33]" : "bg-[#e2e2e2]"}`}
                     />
 
-                    <div className="flex flex-col gap-3">
+                     <div className="flex flex-col gap-3">
                       {plan.features.map((feature, featureIndex) => (
                         <div
                           key={featureIndex}
@@ -766,7 +710,7 @@ export const TrustVerify = (): JSX.Element => {
                           <img
                             className="w-7 h-7 flex-shrink-0"
                             alt="Checkmark circle"
-                            src="/checkmark-circle-02-5.svg"
+                            src={plan.popular ? "/checkmark-circle-02-5.svg" : "/checkmark-circle-02.svg"}
                           />
                           <span
                             className={`[font-family:'DM_Sans',Helvetica] font-normal text-2xl tracking-[0] leading-10 ${plan.popular ? "text-grayswhite" : "text-[#0b3a78]"}`}
@@ -794,132 +738,160 @@ export const TrustVerify = (): JSX.Element => {
         </div>
       </section>
 
-      <section className="absolute top-[5500px] left-1/2 -translate-x-1/2 z-50">
-        <Card className="bg-[#ffffff] rounded-[10px] overflow-hidden shadow-[0px_2px_10px_#0b3a7899] border-0">
-          <CardContent className="p-[50px] flex flex-col gap-[30px] w-[600px]">
-            <div className="flex items-center gap-4">
-              <div className="flex-1 flex flex-col gap-4">
+      
+
+      <section className="bg-[#ffffff] py-[200px] relative">
+         <section className="absolute top-1/2 right-[100px] -translate-y-1/2 z-50">
+          <Card className="bg-[#ffffff] rounded-[10px] overflow-hidden shadow-[0px_2px_10px_#0b3a7899] border-0">
+            <CardContent className="p-[50px] flex flex-col gap-[30px] w-[600px]">
+              <div className="flex items-center gap-4">
+                <div className="flex-1 flex flex-col gap-4">
+                  <Label
+                    htmlFor="fullName"
+                    className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
+                  >
+                    Full Name
+                  </Label>
+                  <Input
+                    id="fullName"
+                    defaultValue="Jhon Smith"
+                    className="h-auto bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm"
+                  />
+                </div>
+
+                <div className="flex-1 flex flex-col gap-4">
+                  <Label
+                    htmlFor="email"
+                    className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
+                  >
+                    Email Address
+                  </Label>
+                  <Input
+                    id="email"
+                    defaultValue="JhonSmith@gmail.com"
+                    className="h-auto bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center gap-4">
+                <div className="flex-1 flex flex-col gap-4">
+                  <Label
+                    htmlFor="accountType"
+                    className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
+                  >
+                    Account Type
+                  </Label>
+                  <Select>
+                    <SelectTrigger
+                      id="accountType"
+                      className="h-auto bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm"
+                    >
+                      <SelectValue placeholder="Select Type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="personal">Personal</SelectItem>
+                      <SelectItem value="business">Business</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="flex-1 flex flex-col gap-4">
+                  <Label
+                    htmlFor="industrySector"
+                    className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
+                  >
+                    Industry Sector
+                  </Label>
+                  <Select>
+                    <SelectTrigger
+                      id="industrySector"
+                      className="h-auto bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm"
+                    >
+                      <SelectValue placeholder="Select Type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="tech">Technology</SelectItem>
+                      <SelectItem value="finance">Finance</SelectItem>
+                      <SelectItem value="retail">Retail</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-4">
                 <Label
-                  htmlFor="fullName"
+                  htmlFor="useCase"
                   className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
                 >
-                  Full Name
+                  How will you use TrustVerify? (Optional)
                 </Label>
-                <Input
-                  id="fullName"
-                  defaultValue="Jhon Smith"
-                  className="h-auto bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm"
+                <Textarea
+                  id="useCase"
+                  placeholder="Tell us about your use case"
+                  className="h-auto min-h-[80px] bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm resize-none"
                 />
               </div>
 
-              <div className="flex-1 flex flex-col gap-4">
-                <Label
-                  htmlFor="email"
-                  className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
-                >
-                  Email Address
-                </Label>
-                <Input
-                  id="email"
-                  defaultValue="JhonSmith@gmail.com"
-                  className="h-auto bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm"
+              <div className="flex items-center gap-4">
+                <Checkbox
+                  id="terms"
+                  className="border border-solid border-[#0b3a78]"
                 />
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <div className="flex-1 flex flex-col gap-4">
                 <Label
-                  htmlFor="accountType"
-                  className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
+                  htmlFor="terms"
+                  className="[font-family:'DM_Sans',Helvetica] font-normal text-base tracking-[0] leading-[normal] cursor-pointer"
                 >
-                  Account Type
+                  <span className="text-[#0b3a78]">I agree to the </span>
+                  <span className="text-[#0b3a78] underline">
+                    Terms of Service
+                  </span>
+                  <span className="text-[#0b3a78]"> and </span>
+                  <span className="text-[#0b3a78] underline">Privacy Policy</span>
                 </Label>
-                <Select>
-                  <SelectTrigger
-                    id="accountType"
-                    className="h-auto bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm"
-                  >
-                    <SelectValue placeholder="Select Type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="personal">Personal</SelectItem>
-                    <SelectItem value="business">Business</SelectItem>
-                  </SelectContent>
-                </Select>
               </div>
 
-              <div className="flex-1 flex flex-col gap-4">
-                <Label
-                  htmlFor="industrySector"
-                  className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
-                >
-                  Industry Sector
-                </Label>
-                <Select>
-                  <SelectTrigger
-                    id="industrySector"
-                    className="h-auto bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm"
-                  >
-                    <SelectValue placeholder="Select Type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="tech">Technology</SelectItem>
-                    <SelectItem value="finance">Finance</SelectItem>
-                    <SelectItem value="retail">Retail</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
+              <Button className="h-auto bg-secondry rounded-[10px] shadow-[0px_0px_19.5px_#27ae60] px-5 py-3.5 w-full [font-family:'DM_Sans',Helvetica] font-medium text-[#ffffff] text-sm">
+                Join beta waitlist
+              </Button>
+            </CardContent>
+          </Card>
+        </section>
 
-            <div className="flex flex-col gap-4">
-              <Label
-                htmlFor="useCase"
-                className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
-              >
-                How will you use TrustVerify? (Optional)
-              </Label>
-              <Textarea
-                id="useCase"
-                placeholder="Tell us about your use case"
-                className="h-auto min-h-[80px] bg-ppp-white rounded-md border border-solid border-[#d7dedd] p-2 [font-family:'DM_Sans',Helvetica] font-light text-[#9ea3a2] text-sm resize-none"
-              />
+        <section className="relative bg-[url(../frame-2147228454.png)] bg-cover bg-center px-[100px] py-[100px]">
+          <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(11,58,120,0.46)_0%,rgba(11,58,120,0.46)_100%)]" />
+          <div className="relative z-10 flex flex-col items-start justify-center gap-[50px] max-w-[900px]">
+            <div className="flex flex-col items-start gap-[30px]">
+              <h2 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[#ffffff] text-[62px] tracking-[0] leading-[74.4px]">
+                Exclusive Secure <br />
+                Beta Access
+              </h2>
+              <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#ffffff] text-2xl tracking-[0] leading-[normal]">
+                Join now and get free access to advanced fraud protection.
+              </p>
             </div>
-
-            <div className="flex items-center gap-4">
-              <Checkbox
-                id="terms"
-                className="border border-solid border-[#0b3a78]"
-              />
-              <Label
-                htmlFor="terms"
-                className="[font-family:'DM_Sans',Helvetica] font-normal text-base tracking-[0] leading-[normal] cursor-pointer"
-              >
-                <span className="text-[#0b3a78]">I agree to the </span>
-                <span className="text-[#0b3a78] underline">
-                  Terms of Service
-                </span>
-                <span className="text-[#0b3a78]"> and </span>
-                <span className="text-[#0b3a78] underline">Privacy Policy</span>
-              </Label>
-            </div>
-
-            <Button className="h-auto bg-secondry rounded-[10px] shadow-[0px_0px_19.5px_#27ae60] px-5 py-3.5 w-full [font-family:'DM_Sans',Helvetica] font-medium text-[#ffffff] text-sm">
-              Join beta waitlist
-            </Button>
-          </CardContent>
-        </Card>
+          </div>
+        </section>
       </section>
 
       <footer className="bg-[#ffffff] border-t border-solid border-[#e2e2e2] px-[98px] py-[52px]">
         <div className="flex flex-col gap-[30px]">
-          <div className="flex items-start justify-between gap-[690px]">
-            <img
-              className="w-[253px] h-[54.27px]"
-              alt="Group"
-              src="/group.png"
-            />
+          <div className="flex flex-row items-start justify-between">
+            <div className="flex flex-col items-start justify-between gap-[130px]">
+              <img
+                className="w-[253px] h-[54.27px]"
+                alt="Group"
+                src="/group.png"
+              />
 
+              <div className="flex flex-col">
+                <p className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-xl tracking-[0] leading-[24.0px]">
+                  Building trust in digital transactions through fraud <br/>
+                  prevention, identity verification, and secure escrow <br/>
+                  services.
+                </p>
+              </div>
+            </div>
             <div className="flex items-start gap-[100px]">
               {footerSections.map((section, index) => (
                 <div key={index} className="flex flex-col gap-6">
@@ -956,12 +928,6 @@ export const TrustVerify = (): JSX.Element => {
               </div>
             </div>
 
-            <div className="flex flex-col gap-6 max-w-[400px]">
-              <p className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-xl tracking-[0] leading-[24.0px]">
-                Building trust in digital transactions through fraud prevention,
-                identity verification, and secure escrow services.
-              </p>
-            </div>
           </div>
 
           <Separator className="bg-[#e2e2e2]" />
@@ -979,7 +945,7 @@ export const TrustVerify = (): JSX.Element => {
                 Privacy Policy
               </a>
 
-              <Separator orientation="vertical" className="h-6 bg-greyg-400" />
+              <Separator orientation="vertical" className="h-1 w-1 rounded-full bg-greyg-400" />
 
               <a
                 href="#"
@@ -988,7 +954,7 @@ export const TrustVerify = (): JSX.Element => {
                 Legal
               </a>
 
-              <Separator orientation="vertical" className="h-6 bg-greyg-400" />
+              <Separator orientation="vertical" className="h-1 w-1 rounded-full bg-greyg-400" />
 
               <a
                 href="#"
