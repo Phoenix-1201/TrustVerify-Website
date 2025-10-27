@@ -1,6 +1,6 @@
-import React from "react";
-import { Shield, RefreshCw, Search, UserCheck } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Menu, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import { Badge } from "../../components/ui/badge";
 import { Button } from "../../components/ui/button";
 import { Card, CardContent } from "../../components/ui/card";
@@ -138,13 +138,6 @@ const processSteps = [
   },
 ];
 
-const perfectForItems = [
-  "E-commerce",
-  "Marketplaces",
-  "B2B Services",
-  "Digital Platforms",
-];
-
 const benefits = [
   {
     icon: "/frame-2147228780.svg",
@@ -249,6 +242,7 @@ const footerSections = [
 
 export const TrustVerify = (): JSX.Element => {
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleNavigation = (href: string) => {
     if (href.startsWith('/')) {
@@ -260,6 +254,12 @@ export const TrustVerify = (): JSX.Element => {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     }
+    // Close mobile menu after navigation
+    setIsMobileMenuOpen(false);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   return (
@@ -268,25 +268,36 @@ export const TrustVerify = (): JSX.Element => {
         
         
 
-        <div className="absolute top-[600px] left-[1000px] pointer-events-none">
-          <img
-            className="w-full h-full object-cover"
-            alt="Vector"
-            src="/vector.png"
-          />
+        {/* Decorative graphics — responsive */}
+        <div className="absolute inset-0 flex justify-center lg:justify-end items-start">
+          {/* Green glow */}
+          <div className="hidden lg:block absolute bg-[rgba(35,182,114,0.32)] rounded-full blur-[123px]
+                          w-[35vw] max-w-[466px] aspect-square top-[25%] right-[15%]" />
+          
+          {/* Vector pattern */}
+          <div className="hidden lg:block absolute top-[70%] right-[10%] w-[30vw] max-w-[800px] pointer-events-none">
+            <img
+              src="/vector.png"
+              alt="Vector"
+              className="w-full h-full object-contain"
+            />
+          </div>
+
+          {/* Main Group 466 Image */}
+          <div className="hidden lg:block absolute top-[25%] right-[15%] w-[30vw] max-w-[824.17px]">
+            <img
+              src="/Group 466.png"
+              alt="Group 466"
+              className="w-full h-auto object-contain"
+            />
+          </div>
         </div>
 
-        <div className="absolute w-[466px] h-[466px] left-[1127px] top-[229px] bg-[rgba(35,182,114,0.32)] rounded-full blur-[123px] pointer-events-none" />
-        <img
-          className="absolute top-[150px] left-[950px]"
-          alt="Group 466"
-          src="/Group 466.png"
-        />
 
         <header className="absolute top-[50px] left-0 right-0 flex items-center justify-between px-4 md:px-[100px]">
           <img className="h-[37px]" alt="Frame" src="/frame-2147228395.svg" />
 
-          <nav className="hidden md:flex items-center gap-[50px]">
+          <nav className="hidden lg:flex items-center gap-[50px]">
             {navigationItems.map((item, index) => (
               <button
                 key={index}
@@ -302,30 +313,91 @@ export const TrustVerify = (): JSX.Element => {
             ))}
           </nav>
 
-          <Button className="h-auto bg-secondry rounded-[10px] shadow-[0px_0px_19.5px_#27ae60] px-5 py-3.5 [font-family:'DM_Sans',Helvetica] font-medium text-[#ffffff] text-sm">
-            Join beta
-          </Button>
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Button className="hidden lg:block h-auto bg-secondry rounded-[10px] shadow-[0px_0px_19.5px_#27ae60] px-5 py-3.5 [font-family:'DM_Sans',Helvetica] font-medium text-[#ffffff] text-sm">
+              Join beta
+            </Button>
+            
+            {/* Mobile hamburger menu button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden bg-[#27ae60] rounded-[10px] p-2 sm:p-3 shadow-[0px_0px_19.5px_#27ae60]"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              ) : (
+                <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              )}
+            </button>
+          </div>
         </header>
 
-        <div className="relative z-10 flex flex-col items-start gap-[30px] max-w-[1200px]">
-          <Badge className="h-auto inline-flex items-center gap-[22.17px] px-[22.17px] py-4 bg-[#ffffff] rounded-[15.84px] shadow-[0px_0px_22.81px_#00000012] border-0">
+        {/* Mobile Navigation Panel */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden fixed top-0 left-0 h-full w-full bg-[#27ae60] z-50">
+            <div className="flex flex-col h-full">
+              {/* Header with logo and close button */}
+              <div className="flex items-center justify-between p-4 sm:p-6 mt-4 mx-3">
+                <img className="h-[32px] sm:h-[37px]" alt="Frame" src="/frame-2147228395.svg" />
+                <button
+                  onClick={toggleMobileMenu}
+                  className="bg-white/20 rounded-full p-2 hover:bg-white/30 transition-colors"
+                >
+                  <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                </button>
+              </div>
+              
+              {/* Navigation items */}
+              <nav className="flex flex-col px-4 sm:px-6 py-6 sm:py-8 space-y-4 sm:space-y-6 flex-1">
+                {navigationItems.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleNavigation(item.href)}
+                    className={`text-left py-3 sm:py-4 px-3 sm:px-4 rounded-lg transition-colors [font-family:'DM_Sans',Helvetica] text-lg sm:text-xl ${
+                      item.active
+                        ? "bg-white/20 text-white font-medium"
+                        : "text-white/90 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </nav>
+              
+              {/* Join Beta button at bottom */}
+              <div className="p-6 sm:p-8">
+                <Button 
+                  onClick={() => handleNavigation('/')}
+                  className="w-full bg-white rounded-[10px] px-4 sm:px-5 py-3 sm:py-4 [font-family:'DM_Sans',Helvetica] font-medium text-base sm:text-lg hover:bg-white/90"
+                >
+                  <span className="bg-[linear-gradient(90deg,rgba(39,174,96,1)_0%,rgba(0,82,204,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent]">
+                    Join beta
+                  </span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="relative z-10 flex flex-col items-start gap-[20px] sm:gap-[30px] max-w-[1200px] px-4 sm:px-6 lg:px-0 mt-10 md:mt-0">
+          <Badge className="h-auto inline-flex flex-row items-center gap-3 sm:gap-[22.17px] px-4 sm:px-[22.17px] py-2 sm:py-4 bg-[#ffffff] rounded-[15.84px] shadow-[0px_0px_22.81px_#00000012] border-0">
             <div className="inline-flex items-center gap-[9.5px]">
               <img
-                className="w-[24.29px] h-[24.29px]"
+                className="w-[12px] h-[12px] sm:w-[24.29px] sm:h-[24.29px]"
                 alt="Streamline star"
                 src="/streamline-star-2.svg"
               />
-              <span className="[font-family:'Suisse_Int'l-Regular',Helvetica] font-normal text-[#000000] text-xl tracking-[0] leading-[24.0px] whitespace-nowrap">
+              <span className="[font-family:'Suisse_Int'l-Regular',Helvetica] font-normal text-[#000000] text-xsm sm:text-xl tracking-[0] leading-[20px] sm:leading-[24.0px] whitespace-nowrap">
                 Now in Beta — Limited Early Access
               </span>
             </div>
-            <Separator orientation="vertical" className="h-6 bg-stroke" />
-            <span className="[font-family:'DM_Sans',Helvetica] font-medium text-secondry text-xl tracking-[0] leading-[24.0px] whitespace-nowrap">
+            <Separator orientation="vertical" className="hidden sm:block h-6 bg-stroke" />
+            <span className="[font-family:'DM_Sans',Helvetica] font-medium text-secondry text-xsm sm:text-xl tracking-[0] leading-[20px] sm:leading-[24.0px] whitespace-nowrap">
               Learn More
             </span>
           </Badge>
 
-          <h1 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-normal text-3xl md:text-7xl tracking-[0] leading-[40px] md:leading-[80px]">
+          <h1 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-normal text-2xl sm:text-3xl md:text-5xl lg:text-7xl tracking-[0] leading-[32px] sm:leading-[40px] md:leading-[60px] lg:leading-[80px]">
             <span className="font-medium text-[#ffffff]">
               Build Trust Prevent<br />
               Fraud Protect Every<br />
@@ -333,30 +405,30 @@ export const TrustVerify = (): JSX.Element => {
             <span className="font-medium text-[#27ae60]">Transaction</span>
           </h1>
 
-          <p className="max-w-[800px] font-medium text-[#ffffff] text-base leading-[22px] [font-family:'DM_Sans',Helvetica] tracking-[0]">
+          <p className="max-w-[800px] font-medium text-[#ffffff] text-sm sm:text-base leading-[18px] sm:leading-[22px] [font-family:'DM_Sans',Helvetica] tracking-[0]">
             Enterprise-grade fraud prevention and trust-scoring for modern
             businesses. Secure transactions, verified identities, and instant
             dispute resolution.
           </p>
 
-          <div className="flex items-center gap-16">
+          <div className="flex flex-row items-start sm:items-center gap-4 sm:gap-16">
             {trustBadges.map((badge, index) => (
-              <div key={index} className="inline-flex items-center gap-2.5">
-                <img className="w-6 h-6" alt="Fi" src={badge.icon} />
-                <span className="[font-family:'Suisse_Int'l-Medium',Helvetica] font-medium text-[#ffffff] text-xl tracking-[0] leading-[22px] whitespace-nowrap">
+              <div key={index} className="inline-flex items-center gap-1">
+                <img className="w-3 h-3 sm:w-6 sm:h-6" alt="Fi" src={badge.icon} />
+                <span className="[font-family:'Suisse_Int'l-Medium',Helvetica] text-[#ffffff] text-xs sm:text-xl tracking-[0] leading-[18px] sm:leading-[22px] whitespace-nowrap">
                   {badge.text}
                 </span>
               </div>
             ))}
           </div>
 
-          <div className="inline-flex items-center gap-5">
-            <Button className="h-auto bg-app-secondary rounded-[10px] overflow-hidden shadow-[0px_0px_19.5px_#27ae60] px-[30px] py-[15px] relative">
-              <span className="[font-family:'DM_Sans',Helvetica] font-bold text-[#ffffff] text-lg text-center tracking-[-0.20px] leading-[18px] whitespace-nowrap">
+          <div className="flex flex-row items-center gap-3 sm:gap-5">
+            <Button className="h-auto bg-app-secondary rounded-[10px] overflow-hidden shadow-[0px_0px_19.5px_#27ae60] px-[20px] sm:px-[30px] py-[10px] sm:py-[15px] relative w-full sm:w-auto">
+              <span className="[font-family:'DM_Sans',Helvetica] font-bold text-[#ffffff] text-sm sm:text-lg text-center tracking-[-0.20px] leading-[16px] sm:leading-[18px] whitespace-nowrap">
                 Join Beta Program &nbsp; &nbsp;
               </span>
               <img
-                className="absolute right-[10px] top-1/2 -translate-y-1/2 w-[30px] h-[30px]"
+                className="absolute right-[6px] sm:right-[10px] top-1/2 -translate-y-1/2 w-[20px] h-[20px] sm:w-[30px] sm:h-[30px]"
                 alt="Fi"
                 src="/fi-6941884.svg"
               />
@@ -364,17 +436,17 @@ export const TrustVerify = (): JSX.Element => {
 
             <Button
               variant="outline"
-              className="h-auto rounded-[10px] overflow-hidden border border-solid border-[#27ae60] px-[30px] py-[15px] bg-transparent"
+              className="h-auto rounded-[10px] overflow-hidden border border-solid border-[#27ae60] px-[20px] sm:px-[30px] py-[10px] sm:py-[15px] bg-transparent w-full sm:w-auto"
             >
-              <span className="[font-family:'DM_Sans',Helvetica] font-bold text-app-secondary text-lg text-center tracking-[-0.20px] leading-[18px] whitespace-nowrap">
+              <span className="[font-family:'DM_Sans',Helvetica] font-bold text-app-secondary text-sm sm:text-lg text-center tracking-[-0.20px] leading-[16px] sm:leading-[18px] whitespace-nowrap">
                 Share Feedback
               </span>
             </Button>
           </div>
 
           <div className="inline-flex items-center gap-2.5">
-            <img className="w-6 h-6" alt="Target" src="/target-02.svg" />
-            <span className="[font-family:'Suisse_Int'l-Medium',Helvetica] font-medium text-[#ffffff] text-xl tracking-[0] leading-[22px] whitespace-nowrap">
+            <img className="w-4 h-4 sm:w-6 sm:h-6" alt="Target" src="/target-02.svg" />
+            <span className="[font-family:'Suisse_Int'l-Medium',Helvetica] font-medium text-[#ffffff] text-sm sm:text-xl tracking-[0] leading-[18px] sm:leading-[22px] whitespace-nowrap">
               {" "}
               Launching Q4 2025 · Join 100+ early adopters
             </span>
@@ -384,7 +456,7 @@ export const TrustVerify = (): JSX.Element => {
 
       <section className="bg-[#ffffff]">
         <img
-          className="w-full h-[134px] object-cover"
+          className="w-full h-[65px] lg:h-[134px] object-cover"
           alt="Frame"
           src="/frame-2147227413.svg"
         />
@@ -412,7 +484,7 @@ export const TrustVerify = (): JSX.Element => {
             </div>
           </div>
 
-          <div className="flex items-center justify-between gap-4 w-full max-w-[1720px]">
+          <div className="flex flex-col xl:flex-row items-center justify-between gap-4 w-full max-w-[1720px]">
             {services.map((service, index) => (
               <Card
                 key={index}
@@ -428,7 +500,7 @@ export const TrustVerify = (): JSX.Element => {
                     <h3 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-grayswhite text-xl tracking-[0] leading-[normal]">
                       {service.title}
                     </h3>
-                    <p className="[font-family:'DM_Sans',Helvetica] font-normal text-grayswhite text-xs tracking-[0] leading-[normal] whitespace-pre-line">
+                    <p className="[font-family:'DM_Sans',Helvetica] font-normal text-grayswhite text-xs tracking-[0] leading-[normal] whitespace-pre-line max-w-[150px] xl:max-w-[500px] break-words">
                       {service.description}
                     </p>
                   </div>
@@ -462,20 +534,23 @@ export const TrustVerify = (): JSX.Element => {
 
           {/* Process Flow Section */}
           <div className="relative w-full max-w-[1200px] mx-auto">
-            <div className="absolute top-[45px] left-0 right-0 h-[2px] bg-[#e0e0e0] z-0 mx-10 md:mx-20" />
+            <div className="absolute top-[45px] left-0 right-0 h-[2px] bg-[#e0e0e0] z-0 mx-10 md:mx-32 hidden md:block" />
+            <div className="md:hidden absolute top-0 bottom-0 left-[93px] w-[2px] bg-[#e0e0e0] z-0 my-10" />
 
             <div className="relative z-10 flex flex-col md:flex-row justify-between gap-16 md:gap-0">
               {processSteps.map((processSteps, index) => (
-                <div key={index} className="flex flex-col items-center text-center w-48">
+                <div key={index} className="flex flex-row md:flex-col items-center text-left md:text-center gap-6 md:gap-0 px-14 md:px-0">
                   <div
-                    className={`w-20 h-20 flex items-center justify-center rounded-full shadow-md ${
+                    className={`w-20 h-20 flex items-center justify-center rounded-full shadow-md flex-shrink-0 ${
                       processSteps.active ? "bg-[#0b3a78]" : "bg-white border border-[#e0e0e0]"
                     }`}
                   >
                     {processSteps.icon}
                   </div>
-                  <h3 className="text-xl font-medium mt-6">{processSteps.title}</h3>
-                  <p className="text-gray-500 text-sm mt-2">{processSteps.description}</p>
+                  <div className="flex flex-col">
+                    <h3 className="text-xl font-medium md:mt-6">{processSteps.title}</h3>
+                    <p className="text-gray-500 text-sm md:mt-2">{processSteps.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -483,27 +558,27 @@ export const TrustVerify = (): JSX.Element => {
 
 
           <div className="w-full bg-[#0b3a78] py-[11px]">
-              <div className="flex justify-center items-center gap-6">
-                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
-                  Perfect for
-                </span>
-                <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
-                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
-                  E-commerce
-                </span>
-                <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
-                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
-                  Marketplaces
-                </span>
-                <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
-                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
-                  B2B Services
-                </span>
-                <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
-                <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
-                  Digital Platforms
-                </span>
-              </div>
+            <div className="flex flex-wrap justify-center items-center gap-2 md:gap-6 text-center">
+              <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                Perfect for
+              </span>
+              <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
+              <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                E-commerce
+              </span>
+              <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
+              <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                Marketplaces
+              </span>
+              <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
+              <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                B2B Services
+              </span>
+              <div className="w-2 h-2 bg-[#27ae60] rounded-full" />
+              <span className="[font-family:'DM_Sans',Helvetica] font-medium text-white text-xl tracking-[0] leading-[normal]">
+                Digital Platforms
+              </span>
+            </div>
           </div>
         </div>
       </section>
