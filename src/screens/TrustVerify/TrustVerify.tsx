@@ -603,23 +603,19 @@ export const TrustVerify = (): JSX.Element => {
             </p>
           </div>
 
-          <div className="flex items-start justify-between gap-6 w-full max-w-[1720px]">
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-6 w-full max-w-[1720px]">
             {features.map((feature, index) => (
               <Card
                 key={index}
-                className="flex-1 rounded-[10px] border border-solid border-[#c7c7c7]"
+                className="flex-1 rounded-[10px] bg-white"
               >
                 <CardContent className="p-[30px] flex flex-col gap-[30px]">
                   <div className="flex flex-col gap-3">
-                    <img
-                      className="w-16 h-[60px]"
-                      alt="Frame"
-                      src={feature.icon}
-                    />
-                    <h3 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[#0b3a78] text-xl tracking-[0] leading-[normal] whitespace-pre-line">
+                    <img className="w-16 h-[60px]" alt="Frame" src={feature.icon} />
+                    <h3 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[#0b3a78] text-xl">
                       {feature.title}
                     </h3>
-                    <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-sm tracking-[0] leading-[normal]">
+                    <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-sm">
                       {feature.description}
                     </p>
                   </div>
@@ -632,7 +628,7 @@ export const TrustVerify = (): JSX.Element => {
                           alt="Checkmark circle"
                           src="/checkmark-circle-02.svg"
                         />
-                        <span className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-base text-center tracking-[0] leading-[normal] whitespace-nowrap">
+                        <span className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-base">
                           {item}
                         </span>
                       </div>
@@ -642,50 +638,56 @@ export const TrustVerify = (): JSX.Element => {
               </Card>
             ))}
           </div>
+
         </div>
       </section>
 
       
 
-      <section className="bg-[#ffffff] px-[100px] py-[100px]">
-        <div className="flex items-center gap-[275px]">
+      <section className="bg-white px-6 py-16 md:px-20 lg:px-[100px] lg:py-[100px]">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-[275px]">
+          {/* Left Content */}
           <div className="flex-1 max-w-[600px]">
-            <div className="flex flex-col gap-[30px]">
-              <h2 className="[font-family:'Suisse_Intl-Regular',Helvetica] font-normal text-5xl tracking-[0] leading-[57.6px]">
-                <span className="text-[#000000]">Your One-Stop Trust and </span>
+            <div className="flex flex-col gap-8">
+              {/* Heading */}
+              <h2 className="font-suisse font-normal text-3xl sm:text-4xl lg:text-5xl leading-tight">
+                <span className="text-black">Your One-Stop Trust and </span>
                 <span className="text-[#27ae60]">Security Solution</span>
               </h2>
 
-              <p className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-[17.3px] tracking-[0] leading-[20.8px]">
-                The only trust and security solution you&#39;ll ever need
+              {/* Subtitle */}
+              <p className="font-dmSans text-gray-500 text-base sm:text-lg leading-relaxed">
+                The only trust and security solution you'll ever need
               </p>
 
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-start gap-[11px]">
-                  <img
-                    className="w-[22px] h-[22px] flex-shrink-0 mt-1"
-                    alt="Frame"
-                    src={benefit.icon}
-                  />
-                  <div className="flex flex-col gap-4">
-                    <h3 className="[font-family:'Suisse_Intl-Regular',Helvetica] font-normal text-[#000000] text-2xl tracking-[0] leading-[28.8px]">
-                      {benefit.title}
-                    </h3>
-                    <p className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-base tracking-[0] leading-[19.2px]">
-                      {benefit.description}
-                    </p>
+              {/* Benefits List */}
+              <div className="flex flex-col gap-6">
+                {benefits.map((benefit, index) => (
+                  <div key={index} className="flex items-start gap-3">
+                    <img
+                      className="w-6 h-6 flex-shrink-0 mt-1"
+                      alt={benefit.title}
+                      src={benefit.icon}
+                    />
+                    <div>
+                      <h3 className="font-suisse font-medium text-lg text-black leading-snug">
+                        {benefit.title}
+                      </h3>
+                      <p className="font-dmSans text-gray-500 text-sm sm:text-base leading-relaxed">
+                        {benefit.description}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
 
-              <div className="flex items-center gap-[11px]">
-                <Button className="h-auto bg-app-secondary rounded-[10px] overflow-hidden shadow-[0px_0px_9.8px_2px_#27ae60] px-[15px] py-2.5 relative">
-                  <span className="[font-family:'DM_Sans',Helvetica] font-bold text-[#ffffff] text-lg text-center tracking-[-0.20px] leading-[18px] whitespace-nowrap">
-                    Limited Beta Access — Join Now &nbsp; &nbsp; &nbsp;
-                  </span>
+              {/* CTA Button */}
+              <div className="mt-6">
+                <Button className="relative w-full sm:w-auto bg-[#27ae60] hover:bg-[#219653] text-white font-dmSans font-bold text-lg rounded-xl shadow-[0_0_12px_2px_rgba(39,174,96,0.6)] px-6 py-3 transition-all duration-300">
+                  Limited Beta Access — Join Now
                   <img
-                    className="absolute right-[10px] top-1/2 -translate-y-1/2 w-[30px] h-[30px]"
-                    alt="Fi"
+                    className="absolute right-0 top-1/2 -translate-y-1/2 w-[26px] h-[26px]"
+                    alt="arrow"
                     src="/fi-6941884.svg"
                   />
                 </Button>
@@ -693,102 +695,145 @@ export const TrustVerify = (): JSX.Element => {
             </div>
           </div>
 
-          <img
-            className="w-[875px] h-[657px] rounded-[15px] object-cover"
-            alt="Rectangle"
-            src="/rectangle-1262.png"
-          />
+          {/* Right Image */}
+          <div className="flex-1 w-full">
+            <img
+              className="w-full h-auto rounded-[15px] object-cover"
+              alt="Trust Security Visual"
+              src="/rectangle-1262.png"
+            />
+          </div>
         </div>
       </section>
 
 
 
-      <section id="pricing" className="bg-[#f3f3f3] px-[100px] py-[100px]">
-        <div className="flex flex-col items-center gap-[110px]">
-          <div className="flex flex-col items-center gap-4 max-w-[900px]">
+
+      <section
+        id="pricing"
+        className="bg-[#f3f3f3] px-5 sm:px-8 md:px-[60px] lg:px-[100px] py-[80px] md:py-[100px]"
+      >
+        <div className="flex flex-col items-center gap-[80px] md:gap-[110px]">
+          {/* ===== Header Section ===== */}
+          <div className="flex flex-col items-center gap-4 max-w-[900px] text-center">
             <div className="inline-flex items-center gap-3">
               <div className="w-[2px] h-[24px] bg-[#0b3a78]" />
-              <span className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-xl tracking-[0] leading-[normal] whitespace-nowrap">
+              <span className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-base sm:text-lg md:text-xl">
                 Pricing
               </span>
             </div>
 
-            <h2 className="bg-[linear-gradient(90deg,rgba(39,174,96,1)_0%,rgba(0,82,204,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-transparent text-5xl text-center tracking-[0] leading-[normal] whitespace-nowrap">
+            <h2 className="bg-[linear-gradient(90deg,rgba(39,174,96,1)_0%,rgba(0,82,204,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-transparent text-3xl sm:text-4xl md:text-5xl leading-tight">
               Get Free Fraud Protection During Beta
             </h2>
 
-            <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-xl text-center tracking-[0] leading-[normal]">
-              Get early access to enterprise-grade fraud prevention. Free during
-              beta with exclusive founding member benefits.
+            <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#808080] text-base sm:text-lg md:text-xl leading-relaxed">
+              Get early access to enterprise-grade fraud prevention. Free during beta
+              with exclusive founding member benefits.
             </p>
           </div>
 
-          <div className="flex items-center justify-center gap-[60px] w-full max-w-[1720px]">
+          {/* ===== Pricing Cards ===== */}
+          <div className="flex flex-col lg:flex-row items-center justify-center gap-10 md:gap-[40px] lg:gap-[60px] w-full max-w-[1720px]">
             {pricingPlans.map((plan, index) => (
               <Card
                 key={index}
-                className={`flex-1 rounded-[26px] overflow-hidden ${plan.popular ? "bg-[#0b3a78] shadow-[0px_10px_15px_#0b3a7854]" : "bg-[#ffffff] shadow-[0px_26px_40px_#bccaff21]"} border-0`}
+                className={`w-full sm:max-w-[420px] md:max-w-[500px] rounded-[20px] overflow-hidden ${
+                  plan.popular
+                    ? "bg-[#0b3a78] shadow-[0px_10px_20px_rgba(11,58,120,0.3)]"
+                    : "bg-white shadow-[0px_10px_25px_rgba(188,202,255,0.12)]"
+                } border-0`}
               >
-                <CardContent className="p-10 flex flex-col justify-between h-[850px]">
+                <CardContent className="p-8 md:p-10 flex flex-col justify-between h-auto">
+                  {/* Top section */}
                   <div className="flex flex-col gap-7">
                     <div className="flex flex-col gap-5 relative">
-                      <img className="w-14 h-14" alt="Icon" src={plan.icon} />
+                      <div className="flex items-start gap-3 md:items-start md:gap-5">
+                        {/* Icon */}
+                        <img
+                          className="w-12 h-12 md:w-14 md:h-14"
+                          alt="Icon"
+                          src={plan.icon}
+                        />
 
-                      <div className="flex flex-col gap-6">
-                        <div className="flex flex-col gap-3.5">
-                          <div className="flex items-center gap-16">
-                            <h3
-                              className={`[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[44px] tracking-[-1.00px] leading-[normal] ${plan.popular ? "text-grayswhite" : "text-[#0b3a78]"}`}
-                            >
-                              {plan.name}
-                            </h3>
-                            {plan.popular && (
-                              <Badge className="h-auto bg-[#ffffff14] rounded border border-solid border-[#ffffff] px-2.5 py-[5px]">
-                                <span className="[font-family:'DM_Sans',Helvetica] font-light text-grayswhite text-lg tracking-[0] leading-[normal] whitespace-nowrap">
-                                  Most Popular
-                                </span>
-                              </Badge>
-                            )}
-                          </div>
+                        {/* Content */}
+                        <div className="flex flex-col w-full min-w-0">
+                          {/* Mobile: Badge on top, Desktop: Badge inline with title */}
+                          {/* <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between"> */}
+                            <div className="flex flex-col gap-2 md:flex-row md:items-center">
+                              {plan.popular && (
+                                <Badge className="h-auto bg-[#ffffff14] rounded border border-solid border-white px-2.5 py-[3px] w-fit md:order-2 md:ml-2">
+                                  <span className="[font-family:'DM_Sans',Helvetica] font-light text-white text-sm md:text-base whitespace-nowrap">
+                                    Most Popular
+                                  </span>
+                                </Badge>
+                              )}
+                              
+                              <h3
+                                className={`[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[20px] sm:text-[24px] md:text-[32px] flex-shrink-0 md:order-1 ${
+                                  plan.popular ? "text-white" : "text-[#0b3a78]"
+                                }`}
+                              >
+                                {plan.name}
+                              </h3>
+                            </div>
+                          {/* </div> */}
+
+                          {/* Period */}
                           <p
-                            className={`[font-family:'DM_Sans',Helvetica] font-light text-2xl tracking-[0] leading-8 ${plan.popular ? "text-grayswhite" : "text-[#787777]"}`}
+                            className={`[font-family:'DM_Sans',Helvetica] font-light text-lg md:text-xl ${
+                              plan.popular ? "text-white" : "text-[#787777]"
+                            }`}
                           >
                             {plan.period}
                           </p>
                         </div>
+                      </div>
 
-                        <div className="relative flex flex-row gap-3">
-                          <div
-                            className={`[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-6xl tracking-[-1.00px] leading-[normal] whitespace-nowrap ${plan.popular ? "text-grayswhite" : "text-[#0b3a78]"}`}
-                          >
-                            {plan.price}
-                          </div>
-                          <div
-                            className={`pt-4 [font-family:'DM_Sans',Helvetica] font-light text-2xl tracking-[0] leading-[normal] line-through whitespace-nowrap ${plan.popular ? "text-grayswhite" : "text-[#787777]"}`}
-                          >
-                            {plan.originalPrice}
-                          </div>
-                        </div>
+                      <div className="flex flex-row items-start gap-2">
+                        <span
+                          className={`[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[38px] sm:text-[44px] ${
+                            plan.popular ? "text-white" : "text-[#0b3a78]"
+                          }`}
+                        >
+                          {plan.price}
+                        </span>
+                        <span
+                          className={`line-through text-lg sm:text-xl pt-3 ${
+                            plan.popular ? "text-white" : "text-[#787777]"
+                          }`}
+                        >
+                          {plan.originalPrice}
+                        </span>
                       </div>
                     </div>
 
                     <Separator
-                      className={`${plan.popular ? "bg-[#ffffff33]" : "bg-[#e2e2e2]"}`}
+                      className={`${
+                        plan.popular ? "bg-white" : "bg-[#e2e2e2]"
+                      } h-[1px]`}
                     />
 
-                     <div className="flex flex-col gap-3">
+                    {/* Features */}
+                    <div className="flex flex-col gap-3">
                       {plan.features.map((feature, featureIndex) => (
                         <div
                           key={featureIndex}
-                          className="flex items-center gap-4"
+                          className="flex items-start gap-3 leading-7"
                         >
                           <img
-                            className="w-7 h-7 flex-shrink-0"
-                            alt="Checkmark circle"
-                            src={plan.popular ? "/checkmark-circle-02-5.svg" : "/checkmark-circle-02.svg"}
+                            className="w-6 h-6 flex-shrink-0 mt-[2px]"
+                            alt="check"
+                            src={
+                              plan.popular
+                                ? "/checkmark-circle-02-5.svg"
+                                : "/checkmark-circle-02.svg"
+                            }
                           />
                           <span
-                            className={`[font-family:'DM_Sans',Helvetica] font-normal text-2xl tracking-[0] leading-10 ${plan.popular ? "text-grayswhite" : "text-[#0b3a78]"}`}
+                            className={`[font-family:'DM_Sans',Helvetica] font-normal text-base sm:text-lg ${
+                              plan.popular ? "text-white" : "text-[#0b3a78]"
+                            }`}
                           >
                             {feature}
                           </span>
@@ -797,11 +842,18 @@ export const TrustVerify = (): JSX.Element => {
                     </div>
                   </div>
 
+                  {/* Button */}
                   <Button
-                    className={`h-auto rounded-xl px-11 py-[22px] ${plan.popular ? "bg-grayswhite hover:bg-grayswhite/90" : "bg-transparent hover:bg-transparent border border-solid border-[#27ae60]"}`}
+                    className={`mt-8 h-auto rounded-xl px-10 py-[16px] text-center ${
+                      plan.popular
+                        ? "bg-white hover:bg-white/90"
+                        : "bg-transparent border border-[#27ae60] hover:bg-[#27ae6014]"
+                    }`}
                   >
                     <span
-                      className={`[font-family:'DM_Sans',Helvetica] font-medium text-2xl tracking-[0] leading-10 whitespace-nowrap ${plan.popular ? "text-[#0b3a78]" : "text-secondry"}`}
+                      className={`[font-family:'DM_Sans',Helvetica] font-medium text-lg md:text-xl ${
+                        plan.popular ? "text-[#0b3a78]" : "text-[#27ae60]"
+                      }`}
                     >
                       Get Started
                     </span>
