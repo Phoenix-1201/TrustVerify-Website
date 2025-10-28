@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Menu, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../../components/ui/button";
 import { CardContent } from "../../components/ui/card";
@@ -17,9 +18,9 @@ import { Textarea } from "../../components/ui/textarea";
 
 const navigationItems = [
   { label: "Home", active: false, href: "/" },
-  { label: "Feature", active: false, href: "/#features" },
-  { label: "How it works", active: false, href: "/#how-it-works" },
-  { label: "Pricing", active: false, href: "/#pricing" },
+  { label: "Feature", active: false, href: "#features" },
+  { label: "How it works", active: false, href: "#how-it-works" },
+  { label: "Pricing", active: false, href: "#pricing" },
   { label: "Survey", active: true, href: "/survey" },
 ];
 
@@ -148,6 +149,7 @@ const footerSections = [
 
 export const Survey = (): JSX.Element => {
   const navigate = useNavigate();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   
   const [formData, setFormData] = useState({
     fullName: "",
@@ -192,7 +194,19 @@ export const Survey = (): JSX.Element => {
   const handleNavigation = (href: string) => {
     if (href.startsWith('/')) {
       navigate(href);
+    } else {
+      // Handle anchor links for same page navigation
+      const element = document.querySelector(href);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
+    // Close mobile menu after navigation
+    setIsMobileMenuOpen(false);
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -205,39 +219,98 @@ export const Survey = (): JSX.Element => {
   return (
     <div className="bg-[#ffffff] min-h-screen">
       {/* Hero Section with Header */}
-      <section className="relative bg-[#1e1e1e] px-4 md:px-[100px] py-[50px] min-h-[500px]">
-        <div className="absolute inset-0 bg-[url('/frame-2147228742.png')] bg-cover bg-center opacity-20" />
+      <section className="relative bg-[#1e1e1e] px-4 md:px-[100px] py-[50px] min-h-[400px] sm:min-h-[500px] md:min-h-[600px] overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/frame-2147228742.png')] bg-[length:100%_100%] bg-no-repeat bg-center opacity-10 sm:opacity-15 md:opacity-20"/>
         
         {/* Header */}
-        <header className="relative z-10 mb-[50px]">
-          <div className="flex items-center justify-between">
-            <img className="h-[37px]" alt="TrustVerify Logo" src="/frame-2147228395.svg" />
-            
-            <nav className="hidden md:flex items-center gap-[50px]">
-              {navigationItems.map((item, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleNavigation(item.href)}
-                  className={`[font-family:'DM_Sans',Helvetica] text-xl tracking-[0] leading-[normal] whitespace-nowrap ${
-                    item.active
-                      ? "font-medium text-[#ffffff]"
-                      : "font-normal text-[#ffffff99]"
-                  }`}
-                >
-                  {item.label}
-                </button>
-              ))}
-            </nav>
+        <header className="absolute top-[50px] left-0 right-0 flex items-center justify-between px-4 md:px-[100px]">
+          <img className="h-[37px]" alt="Frame" src="/frame-2147228395.svg" />
 
-            <Button className="h-auto bg-secondry rounded-[10px] shadow-[0px_0px_19.5px_#27ae60] px-5 py-3.5 [font-family:'DM_Sans',Helvetica] font-medium text-[#ffffff] text-sm">
+          <nav className="hidden lg:flex items-center gap-[50px]">
+            {navigationItems.map((item, index) => (
+              <button
+                key={index}
+                onClick={() => handleNavigation(item.href)}
+                className={`[font-family:'DM_Sans',Helvetica] text-xl tracking-[0] leading-[normal] whitespace-nowrap ${
+                  item.active
+                    ? "font-medium text-[#ffffff]"
+                    : "font-normal text-[#ffffff99]"
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2 sm:gap-4">
+            <Button className="hidden lg:block h-auto bg-secondry rounded-[10px] shadow-[0px_0px_19.5px_#27ae60] px-5 py-3.5 [font-family:'DM_Sans',Helvetica] font-medium text-[#ffffff] text-sm">
               Join beta
             </Button>
+            
+            {/* Mobile hamburger menu button */}
+            <button
+              onClick={toggleMobileMenu}
+              className="lg:hidden bg-[#27ae60] rounded-[10px] p-2 sm:p-3 shadow-[0px_0px_19.5px_#27ae60]"
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              ) : (
+                <Menu className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+              )}
+            </button>
           </div>
         </header>
+
+        {/* Mobile Navigation Panel */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden fixed top-0 left-0 h-full w-full bg-[#27ae60] z-50">
+            <div className="flex flex-col h-full">
+              {/* Header with logo and close button */}
+              <div className="flex items-center justify-between p-4 sm:p-6 mt-4 mx-3">
+                <img className="h-[32px] sm:h-[37px]" alt="Frame" src="/frame-2147228395.svg" />
+                <button
+                  onClick={toggleMobileMenu}
+                  className="bg-white/20 rounded-full p-2 hover:bg-white/30 transition-colors"
+                >
+                  <X className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                </button>
+              </div>
+              
+              {/* Navigation items */}
+              <nav className="flex flex-col px-4 sm:px-6 py-6 sm:py-8 space-y-4 sm:space-y-6 flex-1">
+                {navigationItems.map((item, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleNavigation(item.href)}
+                    className={`text-left py-3 sm:py-4 px-3 sm:px-4 rounded-lg transition-colors [font-family:'DM_Sans',Helvetica] text-lg sm:text-xl ${
+                      item.active
+                        ? "bg-white/20 text-white font-medium"
+                        : "text-white/90 hover:bg-white/10 hover:text-white"
+                    }`}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </nav>
+              
+              {/* Join Beta button at bottom */}
+              <div className="p-6 sm:p-8">
+                <Button 
+                  onClick={() => handleNavigation('/')}
+                  className="w-full bg-white rounded-[10px] px-4 sm:px-5 py-3 sm:py-4 [font-family:'DM_Sans',Helvetica] font-medium text-base sm:text-lg hover:bg-white/90"
+                >
+                  <span className="bg-[linear-gradient(90deg,rgba(39,174,96,1)_0%,rgba(0,82,204,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent]">
+                    Join beta
+                  </span>
+                </Button>
+              </div>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Survey Form */}
-      <form onSubmit={handleSubmit} className="px-4 md:px-[100px] py-[80px] mx-auto">
+      <form onSubmit={handleSubmit} className="px-0 py-0 lg:px-[100px] lg:py-[80px] mx-auto">
         
         {/* Section A: Company Information */}
         <section className="bg-[#f3f3f3] py-10">
@@ -641,36 +714,35 @@ export const Survey = (): JSX.Element => {
       </form>
 
       {/* Footer */}
-      <footer className="bg-[#ffffff] border-t border-solid border-[#e2e2e2] px-[98px] py-[52px]">
+      <footer className="bg-[#ffffff] border-t border-solid border-[#e2e2e2] px-[30px] py-[35px] md:px-[98px] md:py-[52px]">
         <div className="flex flex-col gap-[30px]">
-          <div className="flex flex-row items-start justify-between">
-            <div className="flex flex-col items-start justify-between gap-[130px]">
+          {/* Top Section */}
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-[40px] md:gap-0">
+            {/* Logo + Description */}
+            <div className="flex flex-col items-start gap-6 md:gap-[130px]">
               <img
-                className="w-[253px] h-[54.27px]"
+                className="w-[150px] md:w-[253px] h-[30px] md:h-[54.27px]"
                 alt="Group"
                 src="/group.png"
               />
-
-              <div className="flex flex-col">
-                <p className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-xl tracking-[0] leading-[24.0px]">
-                  Building trust in digital transactions through fraud <br/>
-                  prevention, identity verification, and secure escrow <br/>
-                  services.
-                </p>
-              </div>
+              <p className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-base md:text-xl leading-relaxed md:leading-[24px] md:max-w-[350px]">
+                Building trust in digital transactions through fraud prevention, identity verification, and secure escrow services.
+              </p>
             </div>
-            <div className="flex items-start gap-[100px]">
+
+            {/* Footer Sections */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:items-start md:gap-[100px] gap-[40px]">
               {footerSections.map((section, index) => (
-                <div key={index} className="flex flex-col gap-6">
-                  <h3 className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-2xl tracking-[0] leading-9 whitespace-nowrap">
+                <div key={index} className="flex flex-col gap-4">
+                  <h3 className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-xl md:text-2xl tracking-[0] leading-8 md:leading-9">
                     {section.title}
                   </h3>
-                  <div className="flex flex-col gap-3.5">
+                  <div className="flex flex-col gap-3">
                     {section.links.map((link, linkIndex) => (
                       <a
                         key={linkIndex}
                         href={link.href}
-                        className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-sm tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#0b3a78] transition-colors"
+                        className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-sm md:text-base leading-[21px] hover:text-[#0b3a78] transition-colors"
                         {...(link.href.startsWith("http") && {
                           rel: "noopener noreferrer",
                           target: "_blank",
@@ -683,49 +755,52 @@ export const Survey = (): JSX.Element => {
                 </div>
               ))}
 
-              <div className="flex flex-col gap-6">
-                <h3 className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-2xl tracking-[0] leading-9 whitespace-nowrap">
+              {/* Follow Section */}
+              <div className="flex flex-col gap-4">
+                <h3 className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-xl md:text-2xl leading-8 md:leading-9">
                   Follow us on:
                 </h3>
-                <img
-                  className="w-full"
-                  alt="Frame"
-                  src="/frame-2147225952.svg"
-                />
+                <div className="flex gap-6">
+                  <img
+                    className="w-[120px] md:w-auto"
+                    alt="Frame"
+                    src="/frame-2147225952.svg"
+                  />
+                </div>
               </div>
             </div>
-
           </div>
 
           <Separator className="bg-[#e2e2e2]" />
 
-          <div className="flex items-center justify-between">
-            <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#000000] text-base tracking-[0] leading-6 whitespace-nowrap">
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 text-center md:text-left">
+            <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#000000] text-sm md:text-base leading-6">
               © 2025 TrustVerify. All rights reserved.
             </p>
 
-            <div className="flex items-center gap-3.5">
+            <div className="flex flex-wrap justify-center items-center gap-3 text-sm md:text-base">
               <a
                 href="#"
-                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 text-base tracking-[0] leading-6 whitespace-nowrap border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
+                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
               >
                 Privacy Policy
               </a>
 
-              <Separator orientation="vertical" className="h-1 w-1 rounded-full bg-greyg-400" />
+              <Separator orientation="vertical" className="hidden md:block h-1 w-1 rounded-full bg-greyg-400" />
 
               <a
                 href="#"
-                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 text-base tracking-[0] leading-6 whitespace-nowrap border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
+                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
               >
                 Legal
               </a>
 
-              <Separator orientation="vertical" className="h-1 w-1 rounded-full bg-greyg-400" />
+              <Separator orientation="vertical" className="hidden md:block h-1 w-1 rounded-full bg-greyg-400" />
 
               <a
                 href="#"
-                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 text-base tracking-[0] leading-6 whitespace-nowrap border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
+                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
               >
                 Accessibility
               </a>

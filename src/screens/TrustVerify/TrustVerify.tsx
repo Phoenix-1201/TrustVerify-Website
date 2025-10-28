@@ -1001,36 +1001,35 @@ export const TrustVerify = (): JSX.Element => {
         </section>
       </section>
 
-      <footer className="bg-[#ffffff] border-t border-solid border-[#e2e2e2] px-[98px] py-[52px]">
+      <footer className="bg-[#ffffff] border-t border-solid border-[#e2e2e2] px-[30px] py-[35px] md:px-[98px] md:py-[52px]">
         <div className="flex flex-col gap-[30px]">
-          <div className="flex flex-row items-start justify-between">
-            <div className="flex flex-col items-start justify-between gap-[130px]">
+          {/* Top Section */}
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-[40px] md:gap-0">
+            {/* Logo + Description */}
+            <div className="flex flex-col items-start gap-6 md:gap-[130px]">
               <img
-                className="w-[253px] h-[54.27px]"
+                className="w-[150px] md:w-[253px] h-[30px] md:h-[54.27px]"
                 alt="Group"
                 src="/group.png"
               />
-
-              <div className="flex flex-col">
-                <p className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-xl tracking-[0] leading-[24.0px]">
-                  Building trust in digital transactions through fraud <br/>
-                  prevention, identity verification, and secure escrow <br/>
-                  services.
-                </p>
-              </div>
+              <p className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-base md:text-xl leading-relaxed md:leading-[24px] md:max-w-[350px]">
+                Building trust in digital transactions through fraud prevention, identity verification, and secure escrow services.
+              </p>
             </div>
-            <div className="flex items-start gap-[100px]">
+
+            {/* Footer Sections */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:flex md:items-start md:gap-[100px] gap-[40px]">
               {footerSections.map((section, index) => (
-                <div key={index} className="flex flex-col gap-6">
-                  <h3 className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-2xl tracking-[0] leading-9 whitespace-nowrap">
+                <div key={index} className="flex flex-col gap-4">
+                  <h3 className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-xl md:text-2xl tracking-[0] leading-8 md:leading-9">
                     {section.title}
                   </h3>
-                  <div className="flex flex-col gap-3.5">
+                  <div className="flex flex-col gap-3">
                     {section.links.map((link, linkIndex) => (
                       <a
                         key={linkIndex}
                         href={link.href}
-                        className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-sm tracking-[0] leading-[21px] whitespace-nowrap hover:text-[#0b3a78] transition-colors"
+                        className="[font-family:'DM_Sans',Helvetica] font-normal text-greysubtittle text-sm md:text-base leading-[21px] hover:text-[#0b3a78] transition-colors"
                         {...(link.href.startsWith("http") && {
                           rel: "noopener noreferrer",
                           target: "_blank",
@@ -1043,49 +1042,52 @@ export const TrustVerify = (): JSX.Element => {
                 </div>
               ))}
 
-              <div className="flex flex-col gap-6">
-                <h3 className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-2xl tracking-[0] leading-9 whitespace-nowrap">
+              {/* Follow Section */}
+              <div className="flex flex-col gap-4">
+                <h3 className="[font-family:'DM_Sans',Helvetica] font-medium text-[#0b3a78] text-xl md:text-2xl leading-8 md:leading-9">
                   Follow us on:
                 </h3>
-                <img
-                  className="w-full"
-                  alt="Frame"
-                  src="/frame-2147225952.svg"
-                />
+                <div className="flex gap-6">
+                  <img
+                    className="w-[120px] md:w-auto"
+                    alt="Frame"
+                    src="/frame-2147225952.svg"
+                  />
+                </div>
               </div>
             </div>
-
           </div>
 
           <Separator className="bg-[#e2e2e2]" />
 
-          <div className="flex items-center justify-between">
-            <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#000000] text-base tracking-[0] leading-6 whitespace-nowrap">
+          {/* Bottom Section */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0 text-center md:text-left">
+            <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#000000] text-sm md:text-base leading-6">
               © 2025 TrustVerify. All rights reserved.
             </p>
 
-            <div className="flex items-center gap-3.5">
+            <div className="flex flex-wrap justify-center items-center gap-3 text-sm md:text-base">
               <a
                 href="#"
-                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 text-base tracking-[0] leading-6 whitespace-nowrap border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
+                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
               >
                 Privacy Policy
               </a>
 
-              <Separator orientation="vertical" className="h-1 w-1 rounded-full bg-greyg-400" />
+              <Separator orientation="vertical" className="hidden md:block h-1 w-1 rounded-full bg-greyg-400" />
 
               <a
                 href="#"
-                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 text-base tracking-[0] leading-6 whitespace-nowrap border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
+                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
               >
                 Legal
               </a>
 
-              <Separator orientation="vertical" className="h-1 w-1 rounded-full bg-greyg-400" />
+              <Separator orientation="vertical" className="hidden md:block h-1 w-1 rounded-full bg-greyg-400" />
 
               <a
                 href="#"
-                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 text-base tracking-[0] leading-6 whitespace-nowrap border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
+                className="[font-family:'DM_Sans',Helvetica] font-normal text-greyg-400 border-b border-solid border-[#9ea2ae] hover:text-[#0b3a78] transition-colors"
               >
                 Accessibility
               </a>
@@ -1093,6 +1095,7 @@ export const TrustVerify = (): JSX.Element => {
           </div>
         </div>
       </footer>
+
     </div>
   );
 };
