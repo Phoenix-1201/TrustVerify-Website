@@ -867,11 +867,11 @@ export const TrustVerify = (): JSX.Element => {
 
       
 
-      <section className="bg-[#ffffff] py-[200px] relative">
-         <section className="absolute top-1/2 right-[100px] -translate-y-1/2 z-50">
-          <Card className="bg-[#ffffff] rounded-[10px] overflow-hidden shadow-[0px_2px_10px_#0b3a7899] border-0">
-            <CardContent className="p-[50px] flex flex-col gap-[30px] w-[600px]">
-              <div className="flex items-center gap-4">
+      <section className="bg-[#ffffff] py-0 md:py-[200px] relative max-md:flex max-md:flex-col">
+        <section className="absolute top-1/2 right-[100px] -translate-y-1/2 z-50 max-md:static max-md:top-auto max-md:right-auto max-md:translate-y-0 max-md:mx-0 max-md:mt-0 max-md:order-2 max-md:w-full">
+          <Card className="bg-[#ffffff] rounded-none md:rounded-[10px] overflow-hidden shadow-none md:shadow-[0px_2px_10px_#0b3a7899] border-0 max-md:rounded-none max-md:shadow-none max-md:border-0 max-md:h-full">
+            <CardContent className="p-[50px] flex flex-col gap-[30px] w-[600px] max-md:w-full max-md:p-6 max-md:gap-6">
+              <div className="flex items-center gap-4 max-md:flex-col max-md:items-stretch max-md:gap-6">
                 <div className="flex-1 flex flex-col gap-4">
                   <Label
                     htmlFor="fullName"
@@ -901,7 +901,7 @@ export const TrustVerify = (): JSX.Element => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 max-md:flex-col max-md:items-stretch max-md:gap-6">
                 <div className="flex-1 flex flex-col gap-4">
                   <Label
                     htmlFor="accountType"
@@ -946,7 +946,7 @@ export const TrustVerify = (): JSX.Element => {
                 </div>
               </div>
 
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 max-md:gap-6">
                 <Label
                   htmlFor="useCase"
                   className="[font-family:'DM_Sans',Helvetica] font-normal text-black-80 text-base tracking-[0] leading-[normal]"
@@ -960,7 +960,7 @@ export const TrustVerify = (): JSX.Element => {
                 />
               </div>
 
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-4 max-md:gap-6">
                 <Checkbox
                   id="terms"
                   className="border border-solid border-[#0b3a78]"
@@ -985,15 +985,15 @@ export const TrustVerify = (): JSX.Element => {
           </Card>
         </section>
 
-        <section className="relative bg-[url(../frame-2147228454.png)] bg-cover bg-center px-[100px] py-[100px]">
+        <section className="relative bg-[url(../frame-2147228454.png)] bg-cover bg-center px-[100px] py-[100px] max-md:px-6 max-md:py-12 max-md:h-[453px] max-md:order-1">
           <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(11,58,120,0.46)_0%,rgba(11,58,120,0.46)_100%)]" />
-          <div className="relative z-10 flex flex-col items-start justify-center gap-[50px] max-w-[900px]">
-            <div className="flex flex-col items-start gap-[30px]">
-              <h2 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[#ffffff] text-[62px] tracking-[0] leading-[74.4px]">
+          <div className="relative z-10 flex flex-col items-start justify-center gap-[50px] max-w-[900px] max-md:gap-8">
+            <div className="flex flex-col items-start gap-[30px] max-md:gap-6">
+              <h2 className="[font-family:'Suisse_Intl-Medium',Helvetica] font-medium text-[#ffffff] text-[62px] tracking-[0] leading-[74.4px] max-md:text-4xl max-md:leading-tight">
                 Exclusive Secure <br />
                 Beta Access
               </h2>
-              <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#ffffff] text-2xl tracking-[0] leading-[normal]">
+              <p className="[font-family:'DM_Sans',Helvetica] font-normal text-[#ffffff] text-2xl tracking-[0] leading-[normal] max-md:text-lg">
                 Join now and get free access to advanced fraud protection.
               </p>
             </div>
